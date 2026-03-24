@@ -1,4 +1,34 @@
-	<div style="background: #f4f4f4; padding: 20px; border-radius: 8px; margin-bottom: 20px; font-family: Verdana, sans-serif;">
+<script>
+function updateSig(ver, field, val) {
+    const out = document.getElementById(ver + '-out-' + field);
+    if (out) out.innerText = val || '[' + field + ']';
+    
+    if (field === 'email') {
+        const link = document.getElementById(ver + '-link-email');
+        if (link) link.href = 'mailto:' + val;
+    }
+}
+
+function copySig(containerId, statusId) {
+    const container = document.getElementById(containerId);
+    const range = document.createRange();
+    range.selectNodeContents(container);
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+    try {
+        document.execCommand('copy');
+        const status = document.getElementById(statusId);
+        status.style.display = 'inline';
+        setTimeout(() => { status.style.display = 'none'; }, 3000);
+    } catch (err) {
+        alert('Could not copy automatically. Please highlight and copy manually.');
+    }
+    selection.removeAllRanges();
+}
+</script>
+
+<div style="background: #f4f4f4; padding: 20px; border-radius: 8px; margin-bottom: 20px; font-family: Verdana, sans-serif;">
 		<h3 style="margin-top:0; color: #484848;">1. NEIP: Personalize Your Signature</h3>
 		<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
 			<input type="text" oninput="updateSig('A', 'name', this.value)" placeholder="First & Last Name" style="padding: 10px; border: 1px solid #ccc;">
