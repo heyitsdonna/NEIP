@@ -1,0 +1,58 @@
+<script>
+function updateSig(ver, field, val) {
+    const out = document.getElementById(ver + '-out-' + field);
+    if (out) out.innerText = val || '[' + field + ']';
+    
+    if (field === 'email') {
+        const link = document.getElementById(ver + '-link-email');
+        if (link) link.href = 'mailto:' + val;
+    }
+}
+
+function copySig(containerId, statusId) {
+    const container = document.getElementById(containerId);
+    const range = document.createRange();
+    range.selectNodeContents(container);
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+    try {
+        document.execCommand('copy');
+        const status = document.getElementById(statusId);
+        status.style.display = 'inline';
+        setTimeout(() => { status.style.display = 'none'; }, 3000);
+    } catch (err) {
+        alert('Could not copy automatically. Please highlight and copy manually.');
+    }
+    selection.removeAllRanges();
+}
+</script>
+
+	<div style="background: #f4f4f4; padding: 20px; border-radius: 8px; margin-bottom: 20px; font-family: Verdana, sans-serif;">
+		<h3 style="margin-top:0; color: #484848;">1. Personalize Your Signature</h3>
+		<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+			<input type="text" oninput="updateSig('B', 'name', this.value)" placeholder="First & Last Name" style="padding: 10px; border: 1px solid #ccc;">
+			<input type="text" oninput="updateSig('B', 'pronouns', this.value)" placeholder="Pronouns (e.g. she/her)" style="padding: 10px; border: 1px solid #ccc;">
+			<input type="text" oninput="updateSig('B', 'title', this.value)" placeholder="Job Title" style="padding: 10px; border: 1px solid #ccc;">
+			<input type="text" oninput="updateSig('B', 'email', this.value)" placeholder="Email" style="padding: 10px; border: 1px solid #ccc;">
+			<input type="text" oninput="updateSig('B', 'phone', this.value)" placeholder="Phone Number (include dashes)" style="padding: 10px; border: 1px solid #ccc;">
+		</div>
+		<p style="font-size: 11px; color: #666; margin-top: 10px;">Double-check the preview below, which updates automatically as you type.</p>
+	</div>
+
+	<h3 style="font-family: Verdana, sans-serif; color: #484848;">2. Preview & Copy</h3>
+
+	<div id="sig-container-B">
+		<table cellpadding="0" cellspacing="0" style=""><tr><td style="padding: 0px 1px 25px 0px; font-family: Verdana, Geneva, sans-serif; font-size: 13px; line-height: 17px; white-space: nowrap;"><p style="font-family: Verdana, Geneva, sans-serif; font-size: 13px; line-height: 17px; font-weight: 700; color: rgb(72,72,72); margin: 1px; white-space: nowrap;">
+			<span id="B-out-name">Sean Ellis</span> (<span id="B-out-pronouns">he/him</span>)
+        </p> <p style="font-family: Verdana, Geneva, sans-serif; font-size: 13px; line-height: 17px; white-space: nowrap; color: rgb(136,136,136); margin: 1px; font-style: italic;">
+        <span id="B-out-title">Director</span>
+    </p> <p style="font-family: Verdana, Geneva, sans-serif; font-size: 13px; line-height: 17px; white-space: nowrap; color: rgb(136,136,136); margin: 1px;">
+          Exoneree Network (A Program of the New England Innocence Project)
+        </p></td></tr> <tr><td style="padding: 0px 1px 0px 0px;"><table cellpadding="0" cellspacing="0" style=""><tr><td style="padding: 25px 1px 25px 0px; border-top: 2px solid rgb(0,175,238); border-bottom: 2px solid rgb(0,175,238);"><table cellpadding="0" cellspacing="0" style=""><tr><td valign="middle" style="padding: 0px 30px 0px 0px;"><table cellpadding="0" cellspacing="0" style=""><tr><td style="padding: 0px 1px 0px 0px;"><p style="margin: 1px;"><a href="https://www.newenglandinnocence.org/exoneree-network"><img src="https://images.squarespace-cdn.com/content/v1/695544570a62e256147516bd/b744b10e-158c-4f82-9672-c7c6550d7506/EN+email+signature.png" alt="Exoneree Network Logo" title="Logo" width="150" height="127" style="display: block; border: 0px; max-width: 150px;"></a></p></td></tr></table></td> <td width="10" style="padding: 0px 1px 0px 0px;"></td> <td style="padding: 0px 1px 0px 0px;"><table cellpadding="0" cellspacing="0" style=""><tr><td style="padding: 1px 5px 1px 0px; vertical-align: middle;"><p style="margin: 1px;"><img src="https://images.squarespace-cdn.com/content/v1/695544570a62e256147516bd/c3ec7a35-b355-4c97-b0ef-2518279bb683/emailsig_email.png" alt="Email" width="18" height="18" style="display: block; border: 0px; margin: 0px; width: 18px; height: 18px;"></p></td> <td style="line-height: 17px; padding: 1px 0px; vertical-align: middle;"><p style="margin: 1px;"><a id="B-link-email" href="mailto:sean@newenglandinnocence.org" style="font-family: Verdana, Geneva, sans-serif; font-size: 13px; line-height: 17px; white-space: nowrap; color: rgb(136, 136, 136); text-decoration: unset !important;"><span id="B-out-email" style="font-family: Verdana, Geneva, sans-serif; font-size: 13px; line-height: 17px; white-space: nowrap; color: rgb(136, 136, 136); text-decoration: unset !important;">sean@newenglandinnocence.org</span></a></p></td></tr> <tr><td style="padding: 1px 5px 1px 0px; vertical-align: middle;"><p style="margin: 1px;"><img src="https://images.squarespace-cdn.com/content/v1/695544570a62e256147516bd/99ba12cf-31a2-402d-a5d8-50f8ee0d726d/emailsig_cell.png" alt="Phone" width="18" height="18" style="display: block; border: 0px; margin: 0px; width: 18px; height: 18px;"></p></td> <td style="line-height: 17px; padding: 1px 0px; vertical-align: middle;"><p style="margin: 1px;"><span id="B-out-phone" style="font-family: Verdana, Geneva, sans-serif; font-size: 13px; line-height: 17px; white-space: nowrap; color: rgb(136, 136, 136); text-decoration: unset !important;">857-654-2995</span></p></td></tr> <!----> <tr><td style="padding: 1px 5px 1px 0px; vertical-align: middle;"><p style="margin: 1px;"><img src="https://images.squarespace-cdn.com/content/v1/695544570a62e256147516bd/fd6cfdb6-05d1-4922-9c56-583abd2171cd/emailsig_website.png" alt="newenglandinnocence.org" width="18" height="18" style="display: block; border: 0px; margin: 0px; width: 18px; height: 18px;"></p></td> <td style="line-height: 17px; padding: 1px 0px; vertical-align: middle;"><p style="margin: 1px;"><a href="https://www.newenglandinnocence.org/" style="font-family: Verdana, Geneva, sans-serif; font-size: 13px; line-height: 17px; white-space: nowrap; color: rgb(0, 175, 238); font-weight: 700; text-decoration: unset !important;"><span style="font-family: Verdana, Geneva, sans-serif; font-size: 13px; line-height: 17px; white-space: nowrap; color: rgb(0, 175, 238); font-weight: 700; text-decoration: unset !important;">newenglandinnocence.org</span></a></p></td></tr></table></td> <td width="15" style="padding: 0px 1px 0px 0px;"></td></tr></table></td></tr></table></td></tr> <tr><td style="padding: 0px 1px 0px 0px;"><table cellpadding="0" cellspacing="0" border="0" style=""><tr><td style="font-size: 0px; line-height: 0px; padding: 25px 1px 0px 0px;"><p style="margin: 1px;"><a href="https://www.facebook.com/exonereenetwork/"><img src="https://images.squarespace-cdn.com/content/v1/695544570a62e256147516bd/355d3367-d24e-4aa1-b9d8-1bb30e1ae1ed/emailsig_fb.png" alt="Facebook" width="30" height="30" style="display: block; border: 0px; margin: 0px; width: 30px; height: 30px;"></a></p></td> <td width="3" style="padding: 0px 0px 1px;"></td><td style="font-size: 0px; line-height: 0px; padding: 25px 1px 0px 0px;"><p style="margin: 1px;"><a href="https://www.instagram.com/exonereenetwork/"><img src="https://images.squarespace-cdn.com/content/v1/695544570a62e256147516bd/87879900-32ad-4cc1-be1a-5b551b72b406/emailsig_ig.png" alt="Instagram" width="30" height="30" style="display: block; border: 0px; margin: 0px; width: 30px; height: 30px;"></a></p></td> <td width="3" style="padding: 0px 0px 1px;"></td><td style="font-size: 0px; line-height: 0px; padding: 25px 1px 0px 0px;"><p style="margin: 1px;"><a href="https://bsky.app/profile/newenglandinnocence.org"><img src="https://images.squarespace-cdn.com/content/v1/695544570a62e256147516bd/4790047c-d71f-432b-8bb3-51b14876d0a6/emailsig_bluesky.png" alt="Bluesky" width="30" height="30" style="display: block; border: 0px; margin: 0px; width: 30px; height: 30px;"></a></p></td> <td width="3" style="padding: 0px 0px 1px;"></td><td style="font-size: 0px; line-height: 0px; padding: 25px 1px 0px 0px;"><p style="margin: 1px;"><a href="https://www.linkedin.com/company/newenglandinnocence"><img src="https://images.squarespace-cdn.com/content/v1/695544570a62e256147516bd/25897690-d113-454c-9b8a-abaed4787340/emailsig_linkedin.png" alt="LinkedIn" width="30" height="30" style="display: block; border: 0px; margin: 0px; width: 30px; height: 30px;"></a></p></td> <td width="3" style="padding: 0px 0px 1px;"></td><td style="font-size: 0px; line-height: 0px; padding: 25px 1px 0px 0px;"><p style="margin: 1px;"><a href="https://www.youtube.com/newenglandinnocence"><img src="https://images.squarespace-cdn.com/content/v1/695544570a62e256147516bd/b586d30c-9e4f-4b5b-b014-ab884c295494/emailsig_youtube.png" alt="YouTube" width="30" height="30" style="display: block; border: 0px; margin: 0px; width: 30px; height: 30px;"></a></p></td> <td width="3" style="padding: 0px 0px 1px;"></td></tr></table></td></tr></table>
+	</div>
+
+	<br><br>
+
+	<button onclick="copySig('sig-container-B', 'status-B')" style="background:#00AFEE; color:#fff; padding:10px 20px; border:none; border-radius:5px; cursor:pointer; font-weight:bold;">Copy EN Email Signature</button>
+	<span id="status-B" style="display:none; color:green; margin-left:10px;">✓ Copied! Continue to Step 3 below.</span>
